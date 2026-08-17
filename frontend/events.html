@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Events | Inquisitor</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =========================
+           EVENTS PAGE
+        ========================= */
+
+        .events-container {
+
+            max-width: 1200px;
+
+            margin: 35px auto;
+
+            padding: 0 25px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+
+        }
+
+
+        /* =========================
+           CREATE EVENT
+        ========================= */
+
+        .create-event-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+        }
+
+
+        /* =========================
+           EVENT CARD
+        ========================= */
+
+        .event-card {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 25px 28px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+            box-shadow:
+                0 3px 15px rgba(0, 0, 0, 0.04);
+
+        }
+
+
+        .event-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .event-info h2 {
+
+            color: #111827;
+
+            font-size: 20px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .event-description {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .event-details {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            color: #4b5563;
+
+            font-size: 13px;
+
+        }
+
+
+        .event-details span {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+        }
+
+
+        /* =========================
+           EVENT BUTTONS
+        ========================= */
+
+        .event-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+        .primary-btn,
+        .secondary-btn {
+
+            border-radius: 8px;
+
+            padding: 11px 17px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            border: none;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .primary-btn {
+
+            background: #4f46e5;
+
+            color: white;
+
+        }
+
+
+        .primary-btn:hover {
+
+            background: #4338ca;
+
+        }
+
+
+        /* =========================
+           ATTENDANCE BUTTON
+        ========================= */
+
+        .attendance-btn {
+
+            background: #059669;
+
+            color: white;
+
+        }
+
+
+        .attendance-btn:hover {
+
+            background: #047857;
+
+        }
+
+
+        .secondary-btn {
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            border: 1px solid #d1d5db;
+
+        }
+
+
+        .secondary-btn:hover {
+
+            background: #e5e7eb;
+
+        }
+
+
+        /* =========================
+           EMPTY EVENTS
+        ========================= */
+
+        .empty-events {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 50px 25px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+        }
+
+
+        .empty-events h2 {
+
+            color: #111827;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .loading {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .event-card {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .event-actions {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .events-container {
+
+                padding:
+                    0 15px 30px;
+
+            }
+
+
+            .event-card {
+
+                padding: 20px;
+
+            }
+
+
+            .event-details {
+
+                flex-direction: column;
+
+                gap: 9px;
+
+            }
+
+
+            .event-actions {
+
+                flex-direction: column;
+
+            }
+
+
+            .event-actions a,
+            .event-actions button {
+
+                width: 100%;
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+
+            <div>
+
+                <h2>
+                    INQUISITOR
+                </h2>
+
+                <span>
+                    Learning Platform
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================= -->
+
+        <nav class="navigation">
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <span>
+                    🏠
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+
+            <!-- INTERNSHIPS -->
+
+            <a
+                href="internships.html"
+                class="nav-item"
+            >
+
+                <span>
+                    💼
+                </span>
+
+                Internships
+
+            </a>
+
+
+
+            <!-- APPLICATIONS -->
+
+            <a
+                href="teacher-applications.html"
+                class="nav-item"
+            >
+
+                <span>
+                    📋
+                </span>
+
+                Applications
+
+            </a>
+
+
+
+            <!-- EVENTS -->
+
+            <a
+                href="events.html"
+                class="nav-item active"
+            >
+
+                <span>
+                    📅
+                </span>
+
+                Events
+
+            </a>
+
+
+
+            <!-- COURSES -->
+
+            <a
+                href="courses.html"
+                class="nav-item"
+            >
+
+                <span>
+                    📚
+                </span>
+
+                Courses
+
+            </a>
+
+
+
+            <!-- COMMUNITY -->
+
+            <a
+                href="community.html"
+                class="nav-item"
+            >
+
+                <span>
+                    👥
+                </span>
+
+                Community
+
+            </a>
+
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="notifications.html"
+                class="nav-item"
+            >
+
+                <span>
+                    🔔
+                </span>
+
+                Notifications
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             SIDEBAR BOTTOM
+        ================================================= -->
+
+        <div class="sidebar-bottom">
+
+
+            <a
+                href="#"
+                class="nav-item"
+            >
+
+                <span>
+                    ⚙️
+                </span>
+
+                Settings
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+            >
+
+                <span>
+                    ↪️
+                </span>
+
+                Logout
+
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+
+            <div>
+
+                <p class="breadcrumb">
+                    Teacher / Events
+                </p>
+
+
+                <h1>
+                    Events
+                </h1>
+
+
+                <p class="page-description">
+                    Manage and view upcoming events.
+                </p>
+
+            </div>
+
+
+
+            <!-- TEACHER PROFILE -->
+
+            <div class="teacher-profile">
+
+
+                <div class="notification">
+
+                    🔔
+
+                    <span
+                        class="notification-dot"
+                    ></span>
+
+                </div>
+
+
+                <div class="profile-avatar">
+                    T
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Teacher
+                    </strong>
+
+
+                    <span>
+                        Instructor
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             EVENTS
+        ================================================= -->
+
+        <section class="events-container">
+
+
+            <!-- CREATE EVENT -->
+
+            <div class="create-event-area">
+
+                <a
+                    href="create-event.html"
+                    class="primary-btn"
+                >
+
+                    + Create Event
+
+                </a>
+
+            </div>
+
+
+
+            <!-- EVENTS LIST -->
+
+            <div id="eventsList">
+
+                <div class="loading">
+
+                    Loading events...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+const API_URL =
+    "http://localhost:5000";
+
+
+
+// =====================================================
+// LOAD EVENTS
+// =====================================================
+
+async function loadEvents() {
+
+
+    const eventsList =
+        document.getElementById(
+            "eventsList"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_URL}/api/events`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load events."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const events =
+            data.events || [];
+
+
+
+        // =================================================
+        // NO EVENTS
+        // =================================================
+
+        if (events.length === 0) {
+
+
+            eventsList.innerHTML = `
+
+                <div class="empty-events">
+
+                    <h2>
+                        No Events Available
+                    </h2>
+
+                    <p>
+                        Create your first event
+                        to see it here.
+                    </p>
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+
+        // =================================================
+        // DISPLAY EVENTS
+        // =================================================
+
+        eventsList.innerHTML =
+
+            events.map(function(event) {
+
+
+                return `
+
+                    <div class="event-card">
+
+
+                        <!-- EVENT INFORMATION -->
+
+                        <div class="event-info">
+
+
+                            <h2>
+
+                                ${escapeHtml(
+                                    event.title ||
+                                    "Untitled Event"
+                                )}
+
+                            </h2>
+
+
+                            <p class="event-description">
+
+                                ${escapeHtml(
+                                    event.description ||
+                                    "No description available."
+                                )}
+
+                            </p>
+
+
+                            <div class="event-details">
+
+
+                                <span>
+
+                                    📅
+
+                                    ${escapeHtml(
+                                        event.date ||
+                                        "Date not available"
+                                    )}
+
+                                </span>
+
+
+                                <span>
+
+                                    📍
+
+                                    ${escapeHtml(
+                                        event.venue ||
+                                        "Venue not available"
+                                    )}
+
+                                </span>
+
+
+                                <span>
+
+                                    👥
+
+                                    Capacity:
+
+                                    ${escapeHtml(
+                                        String(
+                                            event.capacity ||
+                                            0
+                                        )
+                                    )}
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             EVENT ACTIONS
+                        ================================================= -->
+
+                        <div class="event-actions">
+
+
+                            <!-- =================================================
+                                 ATTENDANCE BUTTON
+                            ================================================= -->
+
+                            <a
+                                href="event-attendance.html?eventId=${event.id}"
+                                class="primary-btn attendance-btn"
+                            >
+
+                                📋 Attendance
+
+                            </a>
+
+
+
+                            <!-- REGISTER -->
+
+                            <button
+                                type="button"
+                                class="primary-btn register-btn"
+                                data-event-id="${event.id}"
+                            >
+
+                                ✓ Register
+
+                            </button>
+
+
+
+                            <!-- CANCEL -->
+
+                            <button
+                                type="button"
+                                class="secondary-btn cancel-btn"
+                                data-event-id="${event.id}"
+                            >
+
+                                Cancel
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+
+            }).join("");
+
+
+
+        // =================================================
+        // REGISTER BUTTON
+        // =================================================
+
+        document
+            .querySelectorAll(
+                ".register-btn"
+            )
+            .forEach(function(button) {
+
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+
+                        const eventId =
+                            button.dataset.eventId;
+
+
+                        alert(
+                            "You have successfully registered for this event."
+                        );
+
+
+                        console.log(
+                            "Registered event:",
+                            eventId
+                        );
+
+
+                    }
+                );
+
+
+            });
+
+
+
+        // =================================================
+        // CANCEL BUTTON
+        // =================================================
+
+        document
+            .querySelectorAll(
+                ".cancel-btn"
+            )
+            .forEach(function(button) {
+
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+
+                        const confirmation =
+                            confirm(
+                                "Are you sure you want to cancel your registration?"
+                            );
+
+
+                        if (confirmation) {
+
+
+                            alert(
+                                "Registration cancelled successfully."
+                            );
+
+
+                        }
+
+
+                    }
+                );
+
+
+            });
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Events loading error:",
+            error
+        );
+
+
+        eventsList.innerHTML = `
+
+            <div class="empty-events">
+
+                <h2>
+                    Could Not Load Events
+                </h2>
+
+                <p>
+                    Please make sure the backend
+                    server is running on port 5000.
+                </p>
+
+            </div>
+
+        `;
+
+
+    }
+
+}
+
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHtml(value) {
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+// =====================================================
+// START
+// =====================================================
+
+loadEvents();
+
+
+</script>
+
+
+</body>
+
+</html>

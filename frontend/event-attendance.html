@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event Attendance | Inquisitor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+            <div>
+                <h2>INQUISITOR</h2>
+                <span>Learning Platform</span>
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="internships.html" class="nav-item">
+                <span>💼</span>
+                Internships
+            </a>
+
+            <a href="teacher-applications.html" class="nav-item">
+                <span>📄</span>
+                Applications
+            </a>
+
+            <a href="events.html" class="nav-item active">
+                <span>📅</span>
+                Events
+            </a>
+
+            <a href="courses.html" class="nav-item">
+                <span>📚</span>
+                Courses
+            </a>
+
+            <a href="community.html" class="nav-item">
+                <span>👥</span>
+                Community
+            </a>
+
+            <a href="notifications.html" class="nav-item">
+                <span>🔔</span>
+                Notifications
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom Sidebar -->
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="nav-item">
+                <span>⚙️</span>
+                Settings
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>↪️</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div>
+
+                <p class="breadcrumb">
+                    Teacher / Events / Attendance
+                </p>
+
+                <h1>
+                    Event Attendance
+                </h1>
+
+                <p class="page-description">
+                    View registered students and mark attendance.
+                </p>
+
+            </div>
+
+
+            <!-- Teacher Profile -->
+
+            <div class="teacher-profile">
+
+                <div class="notification">
+                    🔔
+                    <span class="notification-dot"></span>
+                </div>
+
+                <div class="profile-avatar">
+                    T
+                </div>
+
+                <div class="profile-info">
+
+                    <strong>
+                        Teacher
+                    </strong>
+
+                    <span>
+                        Instructor
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= EVENT INFORMATION ================= -->
+
+        <section class="form-container">
+
+            <div class="form-header">
+
+                <div>
+
+                    <h2 id="eventTitle">
+                        Web Development Workshop
+                    </h2>
+
+                    <p id="eventInfo">
+                        📅 August 20, 2026
+                        &nbsp;&nbsp; | &nbsp;&nbsp;
+                        📍 Computer Lab
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= STUDENTS ================= -->
+
+            <div class="attendance-list">
+
+
+                <!-- STUDENT 1 -->
+
+                <div class="student-row">
+
+                    <div class="student-info">
+
+                        <div class="student-avatar">
+                            A
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Ali Ahmed
+                            </strong>
+
+                            <p>
+                                ali@example.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="attendance-control">
+
+                        <span>
+                            Present
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            class="attendance-checkbox"
+                            data-name="Ali Ahmed"
+                            data-email="ali@example.com"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <!-- STUDENT 2 -->
+
+                <div class="student-row">
+
+                    <div class="student-info">
+
+                        <div class="student-avatar">
+                            S
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Sarah Khan
+                            </strong>
+
+                            <p>
+                                sarah@example.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="attendance-control">
+
+                        <span>
+                            Present
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            class="attendance-checkbox"
+                            data-name="Sarah Khan"
+                            data-email="sarah@example.com"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <!-- STUDENT 3 -->
+
+                <div class="student-row">
+
+                    <div class="student-info">
+
+                        <div class="student-avatar">
+                            H
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Hamza Malik
+                            </strong>
+
+                            <p>
+                                hamza@example.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="attendance-control">
+
+                        <span>
+                            Present
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            class="attendance-checkbox"
+                            data-name="Hamza Malik"
+                            data-email="hamza@example.com"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <!-- STUDENT 4 -->
+
+                <div class="student-row">
+
+                    <div class="student-info">
+
+                        <div class="student-avatar">
+                            M
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Maryam Ali
+                            </strong>
+
+                            <p>
+                                maryam@example.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="attendance-control">
+
+                        <span>
+                            Present
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            class="attendance-checkbox"
+                            data-name="Maryam Ali"
+                            data-email="maryam@example.com"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <!-- ================= BUTTONS ================= -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="backBtn">
+                        Back to Events
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="saveAttendance">
+                        Save Attendance
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const API_URL = "http://localhost:5000";
+
+
+// =====================================================
+// EVENT ID
+// =====================================================
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const eventId =
+    Number(urlParams.get("eventId") || 1);
+
+
+// =====================================================
+// LOAD EVENT
+// =====================================================
+
+async function loadEvent() {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/api/events`
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load events."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const event =
+            data.events.find(
+                item => item.id === eventId
+            );
+
+
+        if (!event) {
+
+            console.log(
+                "Event not found. Using default event information."
+            );
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "eventTitle"
+        ).textContent = event.title;
+
+
+        document.getElementById(
+            "eventInfo"
+        ).innerHTML =
+            `📅 ${event.date}
+             &nbsp;&nbsp; | &nbsp;&nbsp;
+             📍 ${event.venue}`;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Event loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+// Load event
+loadEvent();
+
+
+// =====================================================
+// SAVE ATTENDANCE
+// =====================================================
+
+document
+    .getElementById("saveAttendance")
+    .addEventListener("click", async function () {
+
+
+        const button =
+            document.getElementById(
+                "saveAttendance"
+            );
+
+
+        const checkboxes =
+            document.querySelectorAll(
+                ".attendance-checkbox"
+            );
+
+
+        const students = [];
+
+
+        // Create students array
+
+        checkboxes.forEach(function (checkbox) {
+
+            students.push({
+
+                name:
+                    checkbox.dataset.name,
+
+                email:
+                    checkbox.dataset.email,
+
+                present:
+                    checkbox.checked
+
+            });
+
+        });
+
+
+        const presentCount =
+            students.filter(
+                student => student.present
+            ).length;
+
+
+        // Disable button
+
+        button.disabled = true;
+
+        button.textContent = "Saving...";
+
+
+        try {
+
+            // Send data to backend
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/attendance`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            eventId:
+                                eventId,
+
+                            eventTitle:
+                                document
+                                    .getElementById(
+                                        "eventTitle"
+                                    )
+                                    .textContent,
+
+                            students:
+                                students
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Attendance could not be saved."
+                );
+
+            }
+
+
+            console.log(
+                "Attendance saved:",
+                data
+            );
+
+
+            alert(
+                "Attendance saved successfully!\n\n" +
+                "Present: " +
+                presentCount +
+                " / " +
+                students.length
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Attendance error:",
+                error
+            );
+
+
+            alert(
+                "Attendance save nahi hui.\n\n" +
+                "Please make sure backend server is running on port 5000."
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Save Attendance";
+
+        }
+
+    });
+
+
+// =====================================================
+// BACK BUTTON
+// =====================================================
+
+document
+    .getElementById("backBtn")
+    .addEventListener("click", function () {
+
+        window.location.href =
+            "events.html";
+
+    });
+
+</script>
+
+</body>
+
+</html>

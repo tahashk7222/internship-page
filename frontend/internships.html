@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Internships | Inquisitor</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           INTERNSHIP PAGE
+        ===================================================== */
+
+        .internship-page {
+
+            padding: 30px;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            gap: 20px;
+
+        }
+
+
+        .page-header h1 {
+
+            margin: 0;
+
+            font-size: 30px;
+
+        }
+
+
+        .page-header p {
+
+            margin-top: 8px;
+
+            color: #777;
+
+        }
+
+
+        /* =====================================================
+           CREATE BUTTON
+        ===================================================== */
+
+        .create-btn {
+
+            display: inline-block;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            text-decoration: none;
+
+        }
+
+
+        .create-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* =====================================================
+           INTERNSHIP CARD
+        ===================================================== */
+
+        .internship-card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.05);
+
+        }
+
+
+        .internship-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .internship-title {
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            margin: 0;
+
+        }
+
+
+        .company {
+
+            color: #666;
+
+            margin-top: 6px;
+
+        }
+
+
+        .status {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           INTERNSHIP INFORMATION
+        ===================================================== */
+
+        .internship-info {
+
+            display: flex;
+
+            gap: 35px;
+
+            margin-top: 18px;
+
+            color: #555;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .actions {
+
+            margin-top: 20px;
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .action-btn {
+
+            padding: 8px 14px;
+
+            border-radius: 6px;
+
+            border: 1px solid #ddd;
+
+            background: white;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+
+        .action-btn:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+        .view-btn {
+
+            color: #2563eb;
+
+        }
+
+
+        .edit-btn {
+
+            color: #d97706;
+
+        }
+
+
+        .delete-btn {
+
+            color: #dc2626;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            border: 1px solid #e5e7eb;
+
+        }
+
+
+        .empty-state h2 {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty-state p {
+
+            color: #777;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .navigation {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .navigation .nav-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px 20px;
+
+            color: #e5e7eb;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .navigation .nav-item span {
+
+            width: 25px;
+
+            min-width: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .navigation .nav-item:hover {
+
+            background: #1e293b;
+
+            color: white;
+
+        }
+
+
+        .navigation .nav-item.active {
+
+            background: #4f46e5;
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR BOTTOM
+        ===================================================== */
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+        }
+
+
+        .sidebar-bottom .nav-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 12px 20px;
+
+            color: #e5e7eb;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+        }
+
+
+        .sidebar-bottom .nav-item:hover {
+
+            background: #1e293b;
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .page-header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .internship-top {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .internship-page {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+
+            <div>
+
+                <h2>
+                    INQUISITOR
+                </h2>
+
+                <span>
+                    Learning Platform
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================= -->
+
+        <nav class="navigation">
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <span>
+                    🏠
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+
+            <!-- INTERNSHIPS -->
+
+            <a
+                href="internships.html"
+                class="nav-item active"
+            >
+
+                <span>
+                    💼
+                </span>
+
+                Internships
+
+            </a>
+
+
+
+            <!-- APPLICATIONS -->
+
+            <a
+                href="teacher-applications.html"
+                class="nav-item"
+            >
+
+                <span>
+                    📋
+                </span>
+
+                Applications
+
+            </a>
+
+
+
+            <!-- EVENTS -->
+
+            <a
+                href="events.html"
+                class="nav-item"
+            >
+
+                <span>
+                    📅
+                </span>
+
+                Events
+
+            </a>
+
+
+
+            <!-- COURSES -->
+
+            <a
+                href="courses.html"
+                class="nav-item"
+            >
+
+                <span>
+                    📚
+                </span>
+
+                Courses
+
+            </a>
+
+
+
+            <!-- COMMUNITY -->
+
+            <a
+                href="community.html"
+                class="nav-item"
+            >
+
+                <span>
+                    👥
+                </span>
+
+                Community
+
+            </a>
+
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="notifications.html"
+                class="nav-item"
+            >
+
+                <span>
+                    🔔
+                </span>
+
+                Notifications
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             SIDEBAR BOTTOM
+        ================================================= -->
+
+        <div class="sidebar-bottom">
+
+
+            <a
+                href="#"
+                class="nav-item"
+            >
+
+                <span>
+                    ⚙️
+                </span>
+
+                Settings
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item"
+            >
+
+                <span>
+                    ↪️
+                </span>
+
+                Logout
+
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ===================================================== -->
+
+    <main class="main-content">
+
+
+        <div class="internship-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================= -->
+
+            <div class="page-header">
+
+
+                <div>
+
+                    <h1>
+                        Internships
+                    </h1>
+
+                    <p>
+                        Manage and view internship opportunities.
+                    </p>
+
+                </div>
+
+
+
+                <!-- CREATE INTERNSHIP -->
+
+                <a
+                    href="create-internship.html"
+                    class="create-btn"
+                >
+
+                    + Create Internship
+
+                </a>
+
+
+            </div>
+
+
+<div class="internship-filters">
+
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search internships..."
+        >
+    </div>
+
+    <select id="companyFilter">
+        <option value="">All Companies</option>
+    </select>
+
+</div>
+
+<div class="internship-section-header">
+    <div>
+        <h2>Available Internships</h2>
+        <p>Explore current internship opportunities and apply directly.</p>
+    </div>
+
+    <span class="internship-count" id="internshipCount">
+        0 Opportunities
+    </span>
+</div>
+
+<div id="internshipList">
+    <p>Loading internships...</p>
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Event | Inquisitor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+            <div>
+                <h2>INQUISITOR</h2>
+                <span>Learning Platform</span>
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="internships.html" class="nav-item">
+                <span>💼</span>
+                Internships
+            </a>
+
+            <a href="teacher-applications.html" class="nav-item">
+                <span>📄</span>
+                Applications
+            </a>
+
+            <a href="events.html" class="nav-item active">
+                <span>📅</span>
+                Events
+            </a>
+
+            <a href="courses.html" class="nav-item">
+                <span>📚</span>
+                Courses
+            </a>
+
+            <a href="community.html" class="nav-item">
+                <span>👥</span>
+                Community
+            </a>
+
+            <a href="notifications.html" class="nav-item">
+                <span>🔔</span>
+                Notifications
+            </a>
+
+        </nav>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="nav-item">
+                <span>⚙️</span>
+                Settings
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>↪️</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="top-header">
+
+            <div>
+
+                <p class="breadcrumb">
+                    Teacher / Events / Create
+                </p>
+
+                <h1>
+                    Create Event
+                </h1>
+
+                <p class="page-description">
+                    Create and publish a new event for students.
+                </p>
+
+            </div>
+
+
+            <!-- TEACHER PROFILE -->
+
+            <div class="teacher-profile">
+
+                <div class="notification">
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </div>
+
+
+                <div class="profile-avatar">
+                    T
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Teacher
+                    </strong>
+
+                    <span>
+                        Instructor
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= FORM ================= -->
+
+        <section class="form-container">
+
+
+            <!-- FORM HEADER -->
+
+            <div class="form-header">
+
+                <div>
+
+                    <h2>
+                        Event Details
+                    </h2>
+
+                    <p>
+                        Fill in the information below to create an event.
+                    </p>
+
+                </div>
+
+                <div class="required-text">
+                    * Required fields
+                </div>
+
+            </div>
+
+
+            <!-- EVENT FORM -->
+
+            <form id="eventForm">
+
+
+                <!-- EVENT TITLE -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Event Title <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Web Development Workshop"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        placeholder="Describe the event..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- DATE + VENUE -->
+
+                <div class="form-row">
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Event Date <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- VENUE -->
+
+                    <div class="form-group">
+
+                        <label for="venue">
+                            Venue <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="venue"
+                            name="venue"
+                            placeholder="e.g. Main Auditorium"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAPACITY -->
+
+                <div class="form-group">
+
+                    <label for="capacity">
+                        Capacity <span>*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="capacity"
+                        name="capacity"
+                        min="1"
+                        placeholder="e.g. 100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="cancelBtn">
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Create Event
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const eventForm = document.getElementById("eventForm");
+
+
+// =====================================================
+// CREATE EVENT
+// =====================================================
+
+eventForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    // GET FORM DATA
+
+    const eventData = {
+
+        title: document
+            .getElementById("title")
+            .value
+            .trim(),
+
+        description: document
+            .getElementById("description")
+            .value
+            .trim(),
+
+        date: document
+            .getElementById("date")
+            .value,
+
+        venue: document
+            .getElementById("venue")
+            .value
+            .trim(),
+
+        capacity: document
+            .getElementById("capacity")
+            .value
+
+    };
+
+
+    // =================================================
+    // VALIDATION
+    // =================================================
+
+    if (
+        !eventData.title ||
+        !eventData.description ||
+        !eventData.date ||
+        !eventData.venue ||
+        !eventData.capacity
+    ) {
+
+        alert("Please fill in all required fields.");
+
+        return;
+
+    }
+
+
+    // =================================================
+    // SEND DATA TO BACKEND
+    // =================================================
+
+    console.log("Event data:", eventData);
+
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/events",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(eventData)
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        console.log("Backend response:", data);
+
+
+        // =================================================
+        // SUCCESS
+        // =================================================
+
+        if (response.ok) {
+
+            alert("Event created successfully!");
+
+            eventForm.reset();
+
+        }
+
+
+        // =================================================
+        // BACKEND ERROR
+        // =================================================
+
+        else {
+
+            alert(
+                data.message ||
+                "Something went wrong while creating the event."
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error("Error:", error);
+
+        alert(
+            "Could not connect to the backend. Make sure the server is running."
+        );
+
+    }
+
+});
+
+
+// =====================================================
+// CANCEL BUTTON
+// =====================================================
+
+document
+    .getElementById("cancelBtn")
+    .addEventListener("click", function() {
+
+        const confirmation = confirm(
+            "Are you sure you want to cancel?"
+        );
+
+
+        if (confirmation) {
+
+            window.location.href = "events.html";
+
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

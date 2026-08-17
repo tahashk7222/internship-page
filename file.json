@@ -1,0 +1,532 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+
+const SAMPLE_INTERNSHIPS = [
+  {
+    id: 1,
+    title: 'Business Analytics Intern',
+    company: 'McKinsey & Company',
+    companyType: 'Multinational',
+    location: 'Hybrid',
+    duration: '3 Months',
+    stipend: '$600 / month',
+    tags: ['Business', 'Excel', 'Data Analysis'],
+    description:
+      'Work closely with our consulting team to gather requirements, build financial/data models, and present data-driven insights to enterprise clients.',
+    requirements: [
+      'Strong proficiency in MS Excel and SQL',
+      'Good communication and presentation skills',
+      'Currently pursuing Business, CS, or Data Science degree',
+    ],
+  },
+  {
+    id: 2,
+    title: 'Digital Marketing Associate',
+    company: 'Unilever',
+    companyType: 'Multinational',
+    location: 'On-site',
+    duration: '6 Months',
+    stipend: '$500 / month',
+    tags: ['Marketing', 'SEO', 'Social Media'],
+    description:
+      'Assist in planning and executing end-to-end digital marketing campaigns across social platforms, analyzing campaign ROI and organic reach.',
+    requirements: [
+      'Familiarity with Google Analytics & Meta Ads Manager',
+      'Basic copy-writing and design sense',
+      'BBA or Marketing background preferred',
+    ],
+  },
+  {
+    id: 3,
+    title: 'Finance & Accounting Intern',
+    company: 'Apex Financial Solutions',
+    companyType: 'Pvt',
+    location: 'Online',
+    duration: '2 Months',
+    stipend: '$300 / month',
+    tags: ['Finance', 'Accounting', 'QuickBooks'],
+    description:
+      'Manage daily bookkeeping entries, assist senior accountants with balance reconciliation, and generate weekly audit summaries.',
+    requirements: [
+      'Understanding of basic accounting principles',
+      'Hands-on experience with Excel or QuickBooks',
+    ],
+  },
+  {
+    id: 4,
+    title: 'Human Resources (HR) Intern',
+    company: 'NextGen HR Consultants',
+    companyType: 'Pvt',
+    location: 'Remote',
+    duration: '3 Months',
+    stipend: '$250 / month',
+    tags: ['HR', 'Recruitment', 'Communication'],
+    description:
+      'Screen candidate resumes, schedule interview rounds, and help onboard new hires into our corporate culture.',
+    requirements: [
+      'Strong interpersonal and email writing skills',
+      'Degree in HR, Psychology, or Business Administration',
+    ],
+  },
+  {
+    id: 5,
+    title: 'Backend Node.js Developer',
+    company: 'TechSphere Solutions',
+    companyType: 'Startup',
+    location: 'Remote',
+    duration: '3 Months',
+    stipend: '$350 / month',
+    tags: ['Node.js', 'Express', 'MongoDB'],
+    description:
+      'Design scalable RESTful APIs, manage MongoDB collections, and integrate third-party payment gateways.',
+    requirements: [
+      'Solid foundation in JavaScript / TypeScript',
+      'Experience with Node.js and Express framework',
+    ],
+  },
+];
+
+type Internship = (typeof SAMPLE_INTERNSHIPS)[number];
+
+const LOCATION_MODES = ['All', 'On-site', 'Remote', 'Online', 'Hybrid'];
+
+export default function InternshipsPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [locationFilter, setLocationFilter] = useState('All');
+  const [companyTypeFilter, setCompanyTypeFilter] = useState('All');
+
+  // Modals state
+  const [detailInternship, setDetailInternship] = useState<Internship | null>(null);
+  const [applyInternship, setApplyInternship] = useState<Internship | null>(null);
+
+  // Application form state
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState('');
+  const [applied, setApplied] = useState(false);
+
+  const MAX_FILE_SIZE_MB = 5;
+  const ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
+
+  // Close modals on Escape, and lock body scroll while one is open
+  useEffect(() => {
+    const anyModalOpen = Boolean(detailInternship || applyInternship);
+    if (!anyModalOpen) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDetailInternship(null);
+        setApplyInternship(null);
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [detailInternship, applyInternship]);
+
+  const resetApplyForm = () => {
+    setFullName('');
+    setEmail('');
+    setResumeFile(null);
+    setFileError('');
+    setApplied(false);
+  };
+
+  const openApplyModal = (internship: Internship) => {
+    setApplyInternship(internship);
+    resetApplyForm();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setFileError('');
+
+    if (!file) {
+      setResumeFile(null);
+      return;
+    }
+
+    const lowerName = file.name.toLowerCase();
+    const hasValidExtension = ALLOWED_EXTENSIONS.some((ext) =>
+      lowerName.endsWith(ext)
+    );
+
+    if (!hasValidExtension) {
+      setFileError('Please upload a PDF, DOC, or DOCX file.');
+      setResumeFile(null);
+      e.target.value = '';
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      setFileError(`File must be smaller than ${MAX_FILE_SIZE_MB}MB.`);
+      setResumeFile(null);
+      e.target.value = '';
+      return;
+    }
+
+    setResumeFile(file);
+  };
+
+  const handleApplySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!resumeFile) {
+      setFileError('A resume file is required.');
+      return;
+    }
+    // NOTE: wire this up to a real submission endpoint (e.g. FormData + fetch/upload)
+    // once a backend is available. For now this only updates local UI state.
+    setApplied(true);
+  };
+
+  // Search & Multi-Filter Logic
+  const filteredInternships = SAMPLE_INTERNSHIPS.filter((item) => {
+    const term = searchTerm.toLowerCase();
+    const matchesSearch =
+      item.title.toLowerCase().includes(term) ||
+      item.company.toLowerCase().includes(term) ||
+      item.tags.some((tag) => tag.toLowerCase().includes(term));
+
+    const matchesLocation =
+      locationFilter === 'All' || item.location === locationFilter;
+
+    const matchesCompanyType =
+      companyTypeFilter === 'All' || item.companyType === companyTypeFilter;
+
+    return matchesSearch && matchesLocation && matchesCompanyType;
+  });
+
+  return (
+    <main className="min-h-screen bg-slate-50 p-6 md:p-12 relative">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900">
+          Find Internship Opportunities
+        </h1>
+        <p className="mt-2 text-slate-600">
+          Explore top business, tech, and corporate internships.
+        </p>
+
+        {/* Filters Section */}
+        <div className="mt-8 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          <div>
+            <label className="text-xs font-bold uppercase text-slate-400">
+              Search
+            </label>
+            <input
+              type="text"
+              placeholder="Search by title, domain, or company..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+            <div>
+              <label className="text-xs font-bold uppercase text-slate-400 block mb-3">
+                Location Mode
+              </label>
+              <div className="flex flex-wrap gap-4">
+                {LOCATION_MODES.map((mode) => (
+                  <label
+                    key={mode}
+                    className="flex items-center space-x-2 cursor-pointer text-sm font-semibold text-slate-700"
+                  >
+                    <input
+                      type="radio"
+                      name="location"
+                      value={mode}
+                      checked={locationFilter === mode}
+                      onChange={(e) => setLocationFilter(e.target.value)}
+                      className="w-4 h-4 text-teal-600 focus:ring-teal-500 border-slate-300"
+                    />
+                    <span>{mode}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-bold uppercase text-slate-400 block mb-2">
+                Company Type
+              </label>
+              <select
+                value={companyTypeFilter}
+                onChange={(e) => setCompanyTypeFilter(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer text-sm font-medium"
+              >
+                <option value="All">All Company Types</option>
+                <option value="Pvt">Pvt Ltd</option>
+                <option value="Multinational">Multinational (MNC)</option>
+                <option value="Startup">Startup</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Cards Grid */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {filteredInternships.map((internship) => (
+            <div
+              key={internship.id}
+              className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-700">
+                    {internship.location}
+                  </span>
+                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
+                    {internship.companyType}
+                  </span>
+                </div>
+
+                <h3 className="mt-4 text-lg font-bold text-slate-900">
+                  {internship.title}
+                </h3>
+                <p className="text-sm font-semibold text-teal-600 mt-0.5">
+                  {internship.company}
+                </p>
+
+                <div className="mt-3 flex justify-between text-xs font-medium text-slate-500">
+                  <span>Duration: {internship.duration}</span>
+                  <span>Stipend: {internship.stipend}</span>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {internship.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-6 flex gap-2">
+                <button
+                  onClick={() => setDetailInternship(internship)}
+                  className="w-1/2 rounded-xl border border-slate-300 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50"
+                >
+                  View Details
+                </button>
+                <button
+                  onClick={() => openApplyModal(internship)}
+                  className="w-1/2 rounded-xl bg-teal-700 py-2.5 text-xs font-bold text-white transition hover:bg-teal-800"
+                >
+                  Apply Now
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {filteredInternships.length === 0 && (
+            <p className="col-span-full text-center text-sm text-slate-500 py-10">
+              No internships match your filters.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Feature 3: Job Detail View Modal */}
+      {detailInternship && (
+        <div
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          onClick={() => setDetailInternship(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="detail-modal-title"
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl relative max-h-[90vh] overflow-y-auto"
+          >
+            <span className="inline-block rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-700">
+              {detailInternship.location} • {detailInternship.companyType}
+            </span>
+
+            <h2
+              id="detail-modal-title"
+              className="text-2xl font-bold text-slate-900 mt-2"
+            >
+              {detailInternship.title}
+            </h2>
+            <p className="text-sm font-semibold text-teal-600">
+              {detailInternship.company}
+            </p>
+
+            <div className="mt-4 flex gap-4 text-xs text-slate-500 font-medium border-y border-slate-100 py-3">
+              <div>
+                <strong className="text-slate-800">Duration:</strong>{' '}
+                {detailInternship.duration}
+              </div>
+              <div>
+                <strong className="text-slate-800">Stipend:</strong>{' '}
+                {detailInternship.stipend}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <h4 className="text-xs font-bold uppercase text-slate-400">
+                About the Role
+              </h4>
+              <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                {detailInternship.description}
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <h4 className="text-xs font-bold uppercase text-slate-400">
+                Requirements
+              </h4>
+              <ul className="list-disc list-inside mt-1 text-sm text-slate-600 space-y-1">
+                {detailInternship.requirements?.map(
+                  (req: string, idx: number) => (
+                    <li key={idx}>{req}</li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            <div className="flex gap-3 justify-end mt-6">
+              <button
+                onClick={() => setDetailInternship(null)}
+                className="px-4 py-2 text-sm text-slate-600 font-semibold"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  openApplyModal(detailInternship);
+                  setDetailInternship(null);
+                }}
+                className="px-5 py-2 bg-teal-700 text-white rounded-xl text-sm font-bold hover:bg-teal-800"
+              >
+                Apply Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Feature 2: Apply Modal with CV/Resume Upload */}
+      {applyInternship && (
+        <div
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          onClick={() => setApplyInternship(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="apply-modal-title"
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl"
+          >
+            <h2 id="apply-modal-title" className="text-xl font-bold text-slate-900">
+              Apply for {applyInternship.title}
+            </h2>
+            <p className="text-sm text-slate-500 mt-1">
+              {applyInternship.company} • {applyInternship.companyType}
+            </p>
+
+            {applied ? (
+              <div className="mt-6 p-4 bg-emerald-50 rounded-xl text-emerald-800 text-center">
+                <p className="font-bold">Application Submitted!</p>
+                <p className="text-xs mt-1">
+                  Your application with resume has been received.
+                </p>
+                <button
+                  onClick={() => setApplyInternship(null)}
+                  className="mt-4 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm font-bold"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleApplySubmit} className="mt-4 space-y-3">
+                <div>
+                  <label className="text-xs font-semibold text-slate-600">
+                    Full Name
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Your Full Name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="w-full mt-1 border border-slate-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-slate-600">
+                    Email Address
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full mt-1 border border-slate-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
+                </div>
+
+                {/* CV / Resume Upload Input */}
+                <div>
+                  <label className="text-xs font-semibold text-slate-600 block">
+                    Upload Resume / CV (PDF / DOC, max {MAX_FILE_SIZE_MB}MB)
+                  </label>
+                  <input
+                    required
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="w-full mt-1 border border-slate-300 rounded-lg p-2 text-xs text-slate-600 bg-slate-50 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-teal-700 file:text-white hover:file:bg-teal-800"
+                  />
+                  {resumeFile && !fileError && (
+                    <p className="text-[11px] text-teal-700 font-semibold mt-1">
+                      Selected File: {resumeFile.name}
+                    </p>
+                  )}
+                  {fileError && (
+                    <p className="text-[11px] text-red-600 font-semibold mt-1">
+                      {fileError}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex gap-2 justify-end mt-6">
+                  <button
+                    type="button"
+                    onClick={() => setApplyInternship(null)}
+                    className="px-4 py-2 text-sm text-slate-600 font-semibold"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-teal-700 text-white rounded-lg text-sm font-bold hover:bg-teal-800"
+                  >
+                    Submit Application
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Internship | Inquisitor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <!-- Logo -->
+        <div class="logo">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+            <div>
+                <h2>INQUISITOR</h2>
+                <span>Learning Platform</span>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <nav class="navigation">
+
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="nav-item">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+
+            <!-- Internships -->
+            <a href="internships.html" class="nav-item active">
+                <span>💼</span>
+                Internships
+            </a>
+
+
+            <!-- Applications -->
+            <a href="teacher-applications.html" class="nav-item">
+                <span>📄</span>
+                Applications
+            </a>
+
+
+            <!-- Events -->
+            <a href="events.html" class="nav-item">
+                <span>📅</span>
+                Events
+            </a>
+
+
+            <!-- Courses -->
+            <a href="courses.html" class="nav-item">
+                <span>📚</span>
+                Courses
+            </a>
+
+
+            <!-- Community -->
+            <a href="community.html" class="nav-item">
+                <span>👥</span>
+                Community
+            </a>
+
+
+            <!-- Notifications -->
+            <a href="notifications.html" class="nav-item">
+                <span>🔔</span>
+                Notifications
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom Sidebar -->
+        <div class="sidebar-bottom">
+
+            <!-- Settings -->
+            <a href="#" class="nav-item">
+                <span>⚙️</span>
+                Settings
+            </a>
+
+
+            <!-- Logout -->
+            <a href="#" class="nav-item">
+                <span>↪️</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="top-header">
+
+            <div>
+
+                <p class="breadcrumb">
+                    Teacher / Internships
+                </p>
+
+                <h1>
+                    Create Internship
+                </h1>
+
+                <p class="page-description">
+                    Create and publish a new internship opportunity for students.
+                </p>
+
+            </div>
+
+
+            <!-- Teacher Profile -->
+            <div class="teacher-profile">
+
+                <div class="notification">
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </div>
+
+
+                <div class="profile-avatar">
+                    T
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Teacher
+                    </strong>
+
+                    <span>
+                        Instructor
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= FORM ================= -->
+
+        <section class="form-container">
+
+
+            <!-- Form Header -->
+            <div class="form-header">
+
+                <div>
+
+                    <h2>
+                        Internship Details
+                    </h2>
+
+                    <p>
+                        Fill in the information below to create an internship.
+                    </p>
+
+                </div>
+
+
+                <div class="required-text">
+                    * Required fields
+                </div>
+
+            </div>
+
+
+            <!-- Internship Form -->
+            <form id="internshipForm">
+
+
+                <!-- Internship Title -->
+                <div class="form-group">
+
+                    <label for="title">
+                        Internship Title <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Frontend Web Development Intern"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Company -->
+                <div class="form-group">
+
+                    <label for="company">
+                        Company Name <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Enter company name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-group">
+
+                    <label for="description">
+                        Internship Description <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        placeholder="Describe the internship, responsibilities and learning opportunities..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Requirements -->
+                <div class="form-group">
+
+                    <label for="requirements">
+                        Requirements <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="requirements"
+                        name="requirements"
+                        rows="5"
+                        placeholder="Enter skills, qualifications or requirements..."
+                        required
+                    ></textarea>
+
+                    <small>
+                        Example: HTML, CSS, JavaScript, React, communication skills
+                    </small>
+
+                </div>
+
+
+                <!-- Duration + Deadline -->
+                <div class="form-row">
+
+
+                    <!-- Duration -->
+                    <div class="form-group">
+
+                        <label for="duration">
+                            Duration <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="duration"
+                            name="duration"
+                            placeholder="e.g. 3 Months"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Deadline -->
+                    <div class="form-group">
+
+                        <label for="deadline">
+                            Application Deadline <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="deadline"
+                            name="deadline"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status -->
+                <div class="form-group">
+
+                    <label for="status">
+                        Internship Status
+                    </label>
+
+                    <select id="status" name="status">
+
+                        <option value="draft">
+                            Save as Draft
+                        </option>
+
+                        <option value="published">
+                            Publish Internship
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="cancelForm()"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Create Internship
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
